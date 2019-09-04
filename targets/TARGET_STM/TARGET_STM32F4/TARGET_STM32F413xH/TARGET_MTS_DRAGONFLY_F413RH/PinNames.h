@@ -132,9 +132,6 @@ typedef enum {
     LED4        = D3,
     LED_RED     = LED1,
     BUTTON1     = NC,
-// STDIO for console print    
-    STDIO_UART_TX = USBTX,
-    STDIO_UART_RX = USBRX,
     SERIAL_TX   = D1,
     SERIAL_RX   = D0,
     SERIAL_RTS  = D3,
@@ -144,7 +141,10 @@ typedef enum {
     SERIAL_DTR  = D7,
     SERIAL_RI   = D8,
     USBTX       = PB_6,
-    USBRX       = PB_7,    
+    USBRX       = PB_7,
+// STDIO for console print    
+    STDIO_UART_TX = USBTX,
+    STDIO_UART_RX = USBRX,    
     RADIO_TX    = PC_6,
     RADIO_RX    = PC_7,
     RADIO_RTS   = PB_10,
