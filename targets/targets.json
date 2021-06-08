@@ -3908,6 +3908,18 @@
             "0828"
         ]
     },
+    "MTS_DRAGONFLY_L496VG": {
+        "inherits": [
+            "MCU_STM32L496xG"
+        ],
+        "supported_form_factors": [
+            "ARDUINO_UNO"
+        ],
+        "detect_code": [
+            "0315"
+        ],
+        "device_name": "STM32L496VGTx"
+    },
     "MCU_STM32L4R5xI": {
         "inherits": [
             "MCU_STM32L4"
