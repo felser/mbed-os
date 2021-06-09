@@ -196,6 +196,7 @@ typedef enum {
     UART2_DSR = ARDUINO_UNO_D5,
     UART2_DTR = ARDUINO_UNO_D7,
     UART2_DCD = ARDUINO_UNO_D4,
+    UART2_RI = ARDUINO_UNO_D8
 
     UART1_TX = PB_6,
     UART1_RX = PB_7,
@@ -238,6 +239,8 @@ typedef enum {
     // I2C1 and I2C3 are available on Arduino pins
     I2C1_SCL = ARDUINO_UNO_D15,
     I2C1_SDA = ARDUINO_UNO_D14,
+    I2C2_SCL = PB_10,
+    I2C2_SDA = PB_14,
     I2C3_SCL = ARDUINO_UNO_A1,
     I2C3_SDA = ARDUINO_UNO_A4,
 
@@ -262,6 +265,7 @@ typedef enum {
     RADIO_VDD_EXT = MON_1V8,
 
     MDMPWRON = RADIO_ONOFF, // 3G_ONOFF DragonFly Design Guide, Page No. 16
+    MDMRST = RADIO_RESET,
     MDMTXD   = RADIO_TX, // Transmit Data
     MDMRXD   = RADIO_RX, // Receive Data
     MDMRTS   = RADIO_RTS, // Request to Send
@@ -280,17 +284,8 @@ typedef enum {
 
     INPUT_POWER = PC_7,
 
-    // added to support ppp
-    MDM_PIN_POLARITY = 0,
-    MDMRST = RADIO_RESET,
-    MDMCURRENTSENSE = (int) 0xFFFFFFFF,
-
-    // GNSS
+    // GNSS/GPS
     GPS_ANT_PWR_EN = PE_9,
-    GNSSEN  = (int) 0xFFFFFFFF,     // VCC_IO to GNSS, should be set to push-pull, no pull-up, output
-    GNSSTXD = (int) 0xFFFFFFFF,
-    GNSSRXD = (int) 0xFFFFFFFF,
-    PWR3V3 = (int) 0xFFFFFFFF,
 
     // Wake up from Standby/Shutdown options are PA0 & PA2.
     WAKEUP  = ARDUINO_UNO_D3,
@@ -298,11 +293,13 @@ typedef enum {
     STM_WKUP = PC_13
 
     // CAN
-    CAN_TX = PB_9,
-    CAN_RX = PB_8,
+    CAN_TX = ARDUINO_UNO_D14,
+    CAN_RX = ARDUINO_UNO_D15,
     // build option
     CAN1_TX = PD_1,
     CAN1_RX = PD_0,
+    CAN2_RX = PB_12,
+    CAN2_TX = ARDUINO_UNO_D9,
 
     LS_LED = PE_6,
 
