@@ -196,7 +196,7 @@ typedef enum {
     UART2_DSR = ARDUINO_UNO_D5,
     UART2_DTR = ARDUINO_UNO_D7,
     UART2_DCD = ARDUINO_UNO_D4,
-    UART2_RI = ARDUINO_UNO_D8
+    UART2_RI = ARDUINO_UNO_D8,
 
     UART1_TX = PB_6,
     UART1_RX = PB_7,
@@ -230,7 +230,7 @@ typedef enum {
 
     // QuadSPI connects to flash part
     QSPI_CLK = PE_10,
-    QSPI_NCS = PE_11
+    QSPI_NCS = PE_11,
     QSPI_IO0 = PE_12,
     QSPI_IO1 = PE_13,
     QSPI_IO2 = PE_14,
@@ -259,7 +259,7 @@ typedef enum {
     AP_READY    = PE_4,
     RADIO_WAKEUP = PE_5,
     NET_MODE    = PD_3,
-    NET_STATUS  = PD_2
+    NET_STATUS  = PD_2,
     VRAD_ALERT  = PB_2,
     MON_1V8     = PC_5,
     RADIO_VDD_EXT = MON_1V8,
@@ -290,7 +290,7 @@ typedef enum {
     // Wake up from Standby/Shutdown options are PA0 & PA2.
     WAKEUP  = ARDUINO_UNO_D3,
     // Wake up build Options
-    STM_WKUP = PC_13
+    STM_WKUP = PC_13,
 
     // CAN
     CAN_TX = ARDUINO_UNO_D14,

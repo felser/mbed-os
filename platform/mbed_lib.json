@@ -250,6 +250,10 @@
             "crash-capture-enabled": true,
             "fatal-error-auto-reboot-enabled": true
         },
+        "MTS_DRAGONFLY_L496VG": {
+            "crash-capture-enabled": true,
+            "fatal-error-auto-reboot-enabled": true
+        },
         "CY8CKIT064B0S2_4343W": {
             "stdio-baud-rate": 115200
         }
