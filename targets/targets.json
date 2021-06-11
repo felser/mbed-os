@@ -3916,7 +3916,7 @@
             "ARDUINO_UNO"
         ],
         "detect_code": [
-            "0315"
+            "0313"
         ],
         "device_name": "STM32L496VGTx"
     },
