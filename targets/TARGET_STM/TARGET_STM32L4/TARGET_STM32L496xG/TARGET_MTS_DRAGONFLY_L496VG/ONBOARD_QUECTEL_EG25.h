@@ -33,7 +33,9 @@ public:
 
 private:
     uint8_t initialized;
-
+    DigitalOut* ls;
+    InterruptIn* net_status;
+    void link_status();
     void press_power_button(int time_ms);
     void onboard_modem_init();
     void onboard_modem_deinit();

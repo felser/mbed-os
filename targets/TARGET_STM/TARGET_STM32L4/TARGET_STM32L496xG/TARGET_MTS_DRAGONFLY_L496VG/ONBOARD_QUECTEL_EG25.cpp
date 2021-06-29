@@ -31,6 +31,8 @@ using namespace mbed;
 ONBOARD_QUECTEL_EG25::ONBOARD_QUECTEL_EG25(FileHandle *fh, PinName pwr, bool active_high, PinName rst) : QUECTEL_EC2X(fh, pwr, active_high, rst)
 {
     initialized = 0;
+    ls = new DigitalOut(LS_LED);
+    net_status = new InterruptIn(NET_STATUS);
 }
 
 nsapi_error_t ONBOARD_QUECTEL_EG25::hard_power_on()
@@ -94,6 +96,7 @@ void ONBOARD_QUECTEL_EG25::onboard_modem_init()
     // MDMRST and MDMPWRON get driven low via open drain.
     gpio_init_inout(&gpio, MDMRST, PIN_INPUT, PullNone, 1);
     gpio_init_inout(&gpio, MDMPWRON, PIN_INPUT, PullNone, 1);
+    gpio_init_in_ex(&gpio, RADIO_STATUS, PullUp);
     // Quectel hardware design guide recommends >= 30ms from powered until
     //  PWRKEY(MDMPWRON) is pulled low.
     wait_us(40000);
@@ -115,10 +118,17 @@ void ONBOARD_QUECTEL_EG25::onboard_modem_deinit()
     initialized = 0;
 }
 
+void ONBOARD_QUECTEL_EG25::link_status()
+{
+    ls->write(net_status->read());
+}
+
 void ONBOARD_QUECTEL_EG25::onboard_modem_power_up()
 {
     // NET_STATUS = input. InterruptIn make LS LED follow.
     // LS_LED = output. Follow NET_STATUS.
+    net_status->rise(callback(this,&ONBOARD_QUECTEL_EG25::link_status));
+    net_status->fall(callback(this,&ONBOARD_QUECTEL_EG25::link_status));
 
     // Make sure the radio is initialized so it can be powered on.
     if (!initialized){
@@ -148,8 +158,20 @@ void ONBOARD_QUECTEL_EG25::onboard_modem_power_up()
         }
     } while (radio_off);
 
-    // Takes >= 9.5s for UART to become active after status. Pad a bit more to be sure.
-    thread_sleep_for(11000);
+    _at.lock();
+
+    _at.set_at_timeout(15000);
+    _at.resp_start();
+    _at.set_stop_tag("RDY");
+    bool rdy = _at.consume_to_stop_tag();
+    _at.set_stop_tag(OK);
+
+    _at.unlock();
+    if (rdy) {
+        tr_debug("Radio outputted RDY");
+    } else {
+        tr_debug("Radio did not output RDY within 15s.");
+    }
 }
 
 void ONBOARD_QUECTEL_EG25::onboard_modem_power_down()
